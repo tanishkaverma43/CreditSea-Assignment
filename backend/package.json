@@ -10,10 +10,18 @@
     "vercel-build": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["credit", "loan", "management", "fintech"],
+  "keywords": [
+    "credit",
+    "loan",
+    "management",
+    "fintech"
+  ],
   "author": "Your Name",
   "license": "ISC",
   "description": "CreditSea - A comprehensive loan management system",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
