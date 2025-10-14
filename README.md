@@ -681,11 +681,4 @@ Give a ⭐ if this project helped you!
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="50" />
 </a>
 
----
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0A512F&height=120&section=footer"/>
-
-**[⬆ Back to Top](#-creditsea---loan-management-system)**
-
 </div>
-2
