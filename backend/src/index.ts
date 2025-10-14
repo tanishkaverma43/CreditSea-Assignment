@@ -31,6 +31,20 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/loans', loanRoutes);
 
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'CreditSea API Server', 
+    version: '1.0.0',
+    status: 'running',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      loans: '/api/loans'
+    }
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ message: 'CreditSea API is running!', timestamp: new Date().toISOString() });
 });
@@ -58,11 +72,23 @@ const connectDB = async () => {
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => {
+    
+    const server = app.listen(PORT, () => {
       console.log(`🚀 Server is running on http://localhost:${PORT}`);
       console.log(`📊 API Health: http://localhost:${PORT}/api/health`);
       console.log(`🔐 Environment: ${process.env.NODE_ENV || 'development'}`);
     });
+
+    server.on('error', (error: any) => {
+      if (error.code === 'EADDRINUSE') {
+        console.error(`❌ Port ${PORT} is already in use. Please try a different port or kill the process using this port.`);
+        console.log(`💡 You can find and kill the process with: lsof -ti:${PORT} | xargs kill -9`);
+      } else {
+        console.error('❌ Server error:', error);
+      }
+      process.exit(1);
+    });
+
   } catch (error) {
     console.error('❌ Failed to start server:', error);
     process.exit(1);

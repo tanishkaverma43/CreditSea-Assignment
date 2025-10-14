@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const loanController_1 = require("../controllers/loanController");
+const auth_1 = require("../middleware/auth");
+const router = express_1.default.Router();
+router.use(auth_1.authenticateToken);
+router.post('/', loanController_1.createLoanApplication);
+router.get('/', loanController_1.getLoanApplications);
+router.get('/user', loanController_1.getUserLoanApplications);
+router.get('/dashboard/stats', loanController_1.getDashboardStats);
+router.get('/:id', loanController_1.getLoanApplicationById);
+router.put('/:id', loanController_1.updateLoanApplication);
+router.put('/:id/verify', loanController_1.verifyLoanApplication);
+router.put('/:id/approve', loanController_1.approveLoanApplication);
+router.delete('/:id', loanController_1.deleteLoanApplication);
+exports.default = router;
