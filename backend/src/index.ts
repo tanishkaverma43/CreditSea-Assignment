@@ -8,7 +8,7 @@ import loanRoutes from './routes/loans';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = parseInt(process.env.PORT || '10000', 10);
 
 app.use(cors({
   origin: [
@@ -68,9 +68,9 @@ const startServer = async () => {
   try {
     await connectDB();
     
-    const server = app.listen(PORT, () => {
-      console.log(`🚀 Server is running on http://localhost:${PORT}`);
-      console.log(`📊 API Health: http://localhost:${PORT}/api/health`);
+    const server = app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
+      console.log(`📊 API Health: http://0.0.0.0:${PORT}/api/health`);
       console.log(`🔐 Environment: ${process.env.NODE_ENV || 'development'}`);
     });
 
